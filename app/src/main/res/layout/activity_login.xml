@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/edit_nome"
         android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -31,41 +31,43 @@
     <EditText
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/edit_cod_pais"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:hint="+55"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/textColorPrimary"
+        android:inputType="number" />
 
     <EditText
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:layout_alignTop="@+id/editText2"
+        android:id="@+id/edit_cod_area"
+        android:layout_alignTop="@+id/edit_cod_pais"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView"
         android:hint="92"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/textColorPrimary"
+        android:inputType="number" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
-        android:layout_alignTop="@+id/editText3"
-        android:layout_toRightOf="@+id/editText3"
-        android:layout_toEndOf="@+id/editText3"
-        android:hint="999999999"
-        android:textColor="@color/textColorPrimary" />
+        android:id="@+id/edit_telefone"
+        android:layout_alignTop="@+id/edit_cod_area"
+        android:layout_toRightOf="@+id/edit_cod_area"
+        android:layout_toEndOf="@+id/edit_cod_area"
+        android:hint="99999-9999"
+        android:textColor="@color/textColorPrimary"
+        android:inputType="number" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/botao_cadastrar"
-        android:id="@+id/button"
-        android:layout_below="@+id/editText2"
+        android:id="@+id/btn_cadastrar"
+        android:layout_below="@+id/edit_cod_pais"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="52dp"
