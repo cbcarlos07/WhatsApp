@@ -2,6 +2,7 @@ package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.StringDef;
 import android.support.v7.app.AlertDialog;
@@ -84,6 +85,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Envio do SMS
                 boolean enviadoSMS = enviaSMS( "+"+telefoneSemFormatacao, mensagemEnvio );
+
+                if( enviadoSMS ){
+
+
+
+                }else{
+
+                }
 
 
                 //HashMap<String, String> usuario = preferencias.getDadosUsuario();
