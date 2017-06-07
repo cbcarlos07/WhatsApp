@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
@@ -88,10 +89,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if( enviadoSMS ){
 
-
-
+                    Intent intent = new Intent( LoginActivity.this, ValidadorActivity.class );
+                    startActivity(intent);
                 }else{
-
+                    Toast.makeText(LoginActivity.this, "Problema ao enviar o SMS, tente novamente", Toast.LENGTH_LONG).show();
                 }
 
 
