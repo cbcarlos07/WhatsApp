@@ -4,4 +4,6 @@
     <string name="botao_logar">Logar</string>
     <string name="texto_cadastre">Não tem conta? Cadastre-se</string>
     <string name="title_activity_cadastro_usuario">CadastroUsuarioActivity</string>
+    <string name="item_configuracoes">Configurações</string>
+    <string name="item_sair">Sair</string>
 </resources>
