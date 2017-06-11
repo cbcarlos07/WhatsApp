@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
 import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Base64Custom;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 import br.com.whatsappandroid.cursoandroid.whatsapp.model.Usuario;
 
 public class LoginActivity2 extends AppCompatActivity {
@@ -67,6 +69,11 @@ public class LoginActivity2 extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if( task.isSuccessful() ){
+
+                    Preferencias preferencias = new Preferencias( LoginActivity2.this );
+                    String identificadoUsuarioLogado = Base64Custom.codificarBase64( usuario.getEmail() );
+                    preferencias.salvarDados( identificadoUsuarioLogado );
+
                     abriTelaPrincipal();
                     Toast.makeText(LoginActivity2.this, "Sucesso ao fazer login", Toast.LENGTH_SHORT).show();
 

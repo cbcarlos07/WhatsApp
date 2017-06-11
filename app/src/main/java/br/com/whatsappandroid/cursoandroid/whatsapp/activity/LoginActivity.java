@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //salvar dados para validação
                 Preferencias preferencias = new Preferencias( LoginActivity.this );
-                preferencias.salvarUsuarioPreferencias(nomeUsuario, telefoneSemFormatacao, token);
+               // preferencias.salvarDados(nomeUsuario, telefoneSemFormatacao, token);
 
                 //Envio do SMS
                 boolean enviadoSMS = enviaSMS( "+"+telefoneSemFormatacao, mensagemEnvio );

@@ -34,7 +34,7 @@ public class ValidadorActivity extends AppCompatActivity {
         validar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //recuperar dados da preferencias do usuario
+                /*//recuperar dados da preferencias do usuario
                 Preferencias preferencias = new Preferencias( ValidadorActivity.this );
                 HashMap<String, String> usuario = preferencias.getDadosUsuario();
 
@@ -45,7 +45,7 @@ public class ValidadorActivity extends AppCompatActivity {
                     Toast.makeText(ValidadorActivity.this, "Token VALIDADO", Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(ValidadorActivity.this, "Token não VALIDADO", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
     }

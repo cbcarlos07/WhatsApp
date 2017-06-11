@@ -4,4 +4,6 @@
     <color name="colorPrimaryDarker">#023933</color>
     <color name="colorPrimary">#0b6156</color>
     <color name="textColorPrimary">#ffffff</color>
+    <color name="coloAccent">#3d958a</color>
+    <color name="cizna">#CCCCCC</color>
 </resources>

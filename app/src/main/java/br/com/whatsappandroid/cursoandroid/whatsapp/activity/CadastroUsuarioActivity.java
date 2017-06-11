@@ -1,5 +1,6 @@
 package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
 import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Base64Custom;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 import br.com.whatsappandroid.cursoandroid.whatsapp.model.Usuario;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
@@ -63,12 +66,19 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     if( task.isSuccessful() ){
                         Toast.makeText(CadastroUsuarioActivity.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
                         FirebaseUser usuarioFirebase = task.getResult().getUser();
-                        usuario.setId( usuarioFirebase.getUid() );
+                       // usuario.setId( usuarioFirebase.getUid() );
+                        String identificadorUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                        usuario.setId( identificadorUsuario );
                         usuario.salvar();
 
-                        autenticacao.signOut();
+                        Preferencias preferencias = new Preferencias( CadastroUsuarioActivity.this );
+                        preferencias.salvarDados( identificadorUsuario );
 
-                        finish();
+                        //autenticacao.signOut();
+
+                       // finish();
+
+                        abrirLoginUsuario();
 
 
 
@@ -93,4 +103,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 }
             });
        }
+
+    public void abrirLoginUsuario(){
+        Intent intent = new Intent( CadastroUsuarioActivity.this, LoginActivity2.class );
+        startActivity( intent );
+        finish();
+    }
 }
