@@ -60,5 +60,6 @@
         android:layout_below="@+id/edit_cadastro_senha"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="31dp" />
+        android:layout_marginTop="31dp"
+        android:theme="@style/botaoPadrao"/>
 </RelativeLayout>
