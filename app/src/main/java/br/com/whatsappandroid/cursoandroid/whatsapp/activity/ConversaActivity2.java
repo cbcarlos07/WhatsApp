@@ -1,7 +1,7 @@
 package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,16 +17,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+
+
+
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
-import br.com.whatsappandroid.cursoandroid.whatsapp.adapter.MensagemAdapter;
 import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
 import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Base64Custom;
 import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 import br.com.whatsappandroid.cursoandroid.whatsapp.model.Mensagem;
-import br.com.whatsappandroid.cursoandroid.whatsapp.model.Mensagem2;
 
 
-public class ConversaActivity extends AppCompatActivity {
+public class ConversaActivity2 extends AppCompatActivity {
 
     private Toolbar toolbar;
     private EditText editMensagem;
@@ -37,11 +38,11 @@ public class ConversaActivity extends AppCompatActivity {
     private ArrayAdapter adapter;
     private ValueEventListener valueEventListenerMensagem;
 
-    //dados do destinatario
+    // dados do destinatário
     private String nomeUsuarioDestinatario;
     private String idUsuarioDestinatario;
 
-    //dados do remetente
+    // dados do rementente
     private String idUsuarioRemetente;
 
     @Override
@@ -55,9 +56,8 @@ public class ConversaActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lv_conversas);
 
         // dados do usuário logado
-        Preferencias preferencias = new Preferencias(ConversaActivity.this);
+        Preferencias preferencias = new Preferencias(ConversaActivity2.this);
         idUsuarioRemetente = preferencias.getIdentificador();
-
 
         Bundle extra = getIntent().getExtras();
 
@@ -67,40 +67,40 @@ public class ConversaActivity extends AppCompatActivity {
             idUsuarioDestinatario = Base64Custom.codificarBase64( emailDestinatario );
         }
 
-
-        //Configura toolbar
+        // Configura toolbar
         toolbar.setTitle( nomeUsuarioDestinatario );
-        toolbar.setNavigationIcon( R.drawable.ic_action_arrow_left );
-        setSupportActionBar( toolbar );
+        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left);
+        setSupportActionBar(toolbar);
 
-        //monta a listview e adapter
-         mensagens = new ArrayList<>();
-         adapter = new ArrayAdapter(
-                  ConversaActivity.this,
-                  android.R.layout.simple_list_item_1,
-                  mensagens
-         );
-       // adapter = new MensagemAdapter(ConversaActivity.this,mensagens);
+        // Monta listview e adapter
+        mensagens = new ArrayList<>();
+        adapter = new ArrayAdapter(
+                ConversaActivity2.this,
+                android.R.layout.simple_list_item_1,
+                mensagens
+        );
         listView.setAdapter( adapter );
 
-        //recuperar  mensagens do firebase
+        // Recuperar mensagens do Firebase
         firebase = ConfiguracaoFirebase.getFirebase()
-                   .child( "mensagens" )
-                   .child( idUsuarioRemetente )
-                   .child( idUsuarioDestinatario ) ;
+                .child( "mensagens" )
+                .child( idUsuarioRemetente )
+                .child( idUsuarioDestinatario );
 
         // Cria listener para mensagens
         valueEventListenerMensagem = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Limpa mensagens
+
+                // Limpar mensagens
                 mensagens.clear();
 
-                //Recupera mensagens
+                // Recupera mensagens
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
                     Mensagem mensagem = dados.getValue( Mensagem.class );
                     mensagens.add( mensagem.getMensagem() );
                 }
+
                 adapter.notifyDataSetChanged();
 
             }
@@ -113,7 +113,8 @@ public class ConversaActivity extends AppCompatActivity {
 
         firebase.addValueEventListener( valueEventListenerMensagem );
 
-        //Envia mensagem
+
+        // Enviar mensagem
         btMensagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,45 +122,40 @@ public class ConversaActivity extends AppCompatActivity {
                 String textoMensagem = editMensagem.getText().toString();
 
                 if( textoMensagem.isEmpty() ){
-                    Toast.makeText(ConversaActivity.this, "Digite uma mensagem para anviar!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConversaActivity2.this, "Digite uma mensagem para enviar!", Toast.LENGTH_LONG).show();
                 }else{
 
                     Mensagem mensagem = new Mensagem();
-                    mensagem.setIdUsuario( idUsuarioRemetente ); //usuario que está enviando a mensagem
+                    mensagem.setIdUsuario( idUsuarioRemetente );
                     mensagem.setMensagem( textoMensagem );
 
-                    salvarMensagem(idUsuarioRemetente, idUsuarioDestinatario, mensagem);
+                    salvarMensagem(idUsuarioRemetente, idUsuarioDestinatario , mensagem );
 
                     editMensagem.setText("");
-                    /*
-                    + mensagens
-                        + carlos@gmail.com
-                           + bruno@gmai.com
-                             + mensagem
-                             + mensagem
-                           + goncalveso@gmai.com
-                             +mensagem
-                     */
+
 
                 }
 
             }
         });
 
+
+
     }
 
     private boolean salvarMensagem(String idRemetente, String idDestinatario, Mensagem mensagem){
-        try{
+        try {
 
             firebase = ConfiguracaoFirebase.getFirebase().child("mensagens");
 
             firebase.child( idRemetente )
                     .child( idDestinatario )
-                    .push() //gera o identificador unico
+                    .push()
                     .setValue( mensagem );
 
             return true;
-        }catch ( Exception e ){
+
+        }catch ( Exception e){
             e.printStackTrace();
             return false;
         }
@@ -168,6 +164,6 @@ public class ConversaActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        firebase.removeEventListener( valueEventListenerMensagem );
+        firebase.removeEventListener(valueEventListenerMensagem);
     }
 }
