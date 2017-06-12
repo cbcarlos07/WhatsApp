@@ -25,6 +25,7 @@ import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
 import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Base64Custom;
 import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 import br.com.whatsappandroid.cursoandroid.whatsapp.model.Mensagem;
+import br.com.whatsappandroid.cursoandroid.whatsapp.model.Mensagem2;
 
 
 public class ConversaActivity2 extends AppCompatActivity {
@@ -97,7 +98,7 @@ public class ConversaActivity2 extends AppCompatActivity {
 
                 // Recupera mensagens
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
-                    Mensagem mensagem = dados.getValue( Mensagem.class );
+                    Mensagem2 mensagem = dados.getValue( Mensagem2.class );
                     mensagens.add( mensagem.getMensagem() );
                 }
 
@@ -125,7 +126,7 @@ public class ConversaActivity2 extends AppCompatActivity {
                     Toast.makeText(ConversaActivity2.this, "Digite uma mensagem para enviar!", Toast.LENGTH_LONG).show();
                 }else{
 
-                    Mensagem mensagem = new Mensagem();
+                    Mensagem2 mensagem = new Mensagem2();
                     mensagem.setIdUsuario( idUsuarioRemetente );
                     mensagem.setMensagem( textoMensagem );
 
@@ -143,7 +144,7 @@ public class ConversaActivity2 extends AppCompatActivity {
 
     }
 
-    private boolean salvarMensagem(String idRemetente, String idDestinatario, Mensagem mensagem){
+    private boolean salvarMensagem(String idRemetente, String idDestinatario, Mensagem2 mensagem){
         try {
 
             firebase = ConfiguracaoFirebase.getFirebase().child("mensagens");
