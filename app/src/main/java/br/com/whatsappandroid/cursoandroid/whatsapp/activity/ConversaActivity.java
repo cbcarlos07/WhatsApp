@@ -100,6 +100,7 @@ public class ConversaActivity extends AppCompatActivity {
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
                     Mensagem mensagem = dados.getValue( Mensagem.class );
                     mensagens.add( mensagem.getMensagem() );
+
                 }
                 adapter.notifyDataSetChanged();
 
