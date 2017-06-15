@@ -33,8 +33,8 @@ public class ConversaActivity extends AppCompatActivity {
     private ImageButton btMensagem;
     private DatabaseReference firebase;
     private ListView listView;
-    private ArrayList<String> mensagens;
-    private ArrayAdapter adapter;
+    private ArrayList<Mensagem> mensagens;
+    private ArrayAdapter<Mensagem> adapter;
     private ValueEventListener valueEventListenerMensagem;
 
     //dados do destinatario
@@ -75,12 +75,12 @@ public class ConversaActivity extends AppCompatActivity {
 
         //monta a listview e adapter
          mensagens = new ArrayList<>();
-         adapter = new ArrayAdapter(
+        /* adapter = new ArrayAdapter(
                   ConversaActivity.this,
                   android.R.layout.simple_list_item_1,
                   mensagens
-         );
-       // adapter = new MensagemAdapter(ConversaActivity.this,mensagens);
+         );*/
+        adapter = new MensagemAdapter(ConversaActivity.this,mensagens);
         listView.setAdapter( adapter );
 
         //recuperar  mensagens do firebase
@@ -99,7 +99,7 @@ public class ConversaActivity extends AppCompatActivity {
                 //Recupera mensagens
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
                     Mensagem mensagem = dados.getValue( Mensagem.class );
-                    mensagens.add( mensagem.getMensagem() );
+                    mensagens.add( mensagem );
 
                 }
                 adapter.notifyDataSetChanged();
