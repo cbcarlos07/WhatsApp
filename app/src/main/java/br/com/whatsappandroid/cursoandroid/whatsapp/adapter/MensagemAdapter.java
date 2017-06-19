@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 import br.com.whatsappandroid.cursoandroid.whatsapp.model.Mensagem;
 
 /**
@@ -36,14 +37,25 @@ public class MensagemAdapter extends ArrayAdapter<Mensagem> {
 
         if( mensagens != null ){
 
+            //Recupera dados do usuário remetente
+            Preferencias preferencias = new Preferencias(context);
+            String idUsuarioRemetente = preferencias.getIdentificador();
+
             //Inicialia objeto para montagem do Layout
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
             //Recuperar mensagem
             Mensagem mensagem = mensagens.get( position );
 
-            //Monta view a partir do xml
-            view = inflater.inflate(R.layout.item_mensagem_esquerda, parent, false);
+            //Monta a view a partir do xml
+            if( idUsuarioRemetente.equals( mensagem.getIdUsuario() ) ){
+                view = inflater.inflate(R.layout.item_mensagem_direita, parent, false);
+            }else{
+                view = inflater.inflate(R.layout.item_mensagem_esquerda, parent, false);
+            }
+
+
+
 
 
             //recuperar elemento para exibicao
