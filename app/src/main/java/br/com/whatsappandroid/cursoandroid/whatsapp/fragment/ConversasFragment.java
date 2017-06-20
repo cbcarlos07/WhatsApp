@@ -59,8 +59,7 @@ public class ConversasFragment extends Fragment {
         firebase = ConfiguracaoFirebase.getFirebase().child( "conversas" )
                     .child( idUsuarioLogado );
 
-        
-        valueEventListenerConversas = new ValueEventListener() {
+                valueEventListenerConversas = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 conversas.clear();
