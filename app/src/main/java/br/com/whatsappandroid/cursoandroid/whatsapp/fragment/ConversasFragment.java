@@ -1,11 +1,13 @@
 package br.com.whatsappandroid.cursoandroid.whatsapp.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,8 +19,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
+import br.com.whatsappandroid.cursoandroid.whatsapp.activity.ConversaActivity;
 import br.com.whatsappandroid.cursoandroid.whatsapp.adapter.ConversaAdapter;
 import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Base64Custom;
 import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 import br.com.whatsappandroid.cursoandroid.whatsapp.model.Conversa;
 
@@ -59,7 +63,7 @@ public class ConversasFragment extends Fragment {
         firebase = ConfiguracaoFirebase.getFirebase().child( "conversas" )
                     .child( idUsuarioLogado );
 
-                valueEventListenerConversas = new ValueEventListener() {
+         valueEventListenerConversas = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 conversas.clear();
@@ -78,6 +82,22 @@ public class ConversasFragment extends Fragment {
             }
         };
 
+        //Adicionar evento de clique na lista
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Conversa conversa = conversas.get( position );
+                Intent intent = new Intent( getActivity(), ConversaActivity.class);
+
+
+                intent.putExtra( "nome", conversa.getNome() );
+                String email = Base64Custom.decodificarBase64( conversa.getIdUsuario() );
+                intent.putExtra( "email", email );
+
+                startActivity( intent );
+            }
+        });
 
         return view;
     }

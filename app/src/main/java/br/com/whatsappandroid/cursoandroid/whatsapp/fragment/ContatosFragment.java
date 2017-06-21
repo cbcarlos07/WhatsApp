@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import br.com.whatsappandroid.cursoandroid.whatsapp.activity.ConversaActivity2;
+
 import br.com.whatsappandroid.cursoandroid.whatsapp.adapter.ContatoAdapter;
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
 import br.com.whatsappandroid.cursoandroid.whatsapp.activity.ConversaActivity;
@@ -46,6 +46,8 @@ public class ContatosFragment extends Fragment {
         super.onStart();
         //só será inicializado quando for inicializado
         firebase.addValueEventListener( valueEventListenerContatos );
+       // firebase.addListenerForSingleValueEvent( valueEventListenerContatos );
+
     }
 
     @Override

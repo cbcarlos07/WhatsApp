@@ -83,6 +83,7 @@ public class LoginActivity2 extends AppCompatActivity {
 
                     identificadoUsuarioLogado = Base64Custom.codificarBase64( usuario.getEmail() );
 
+
                     firebase = ConfiguracaoFirebase.getFirebase()
                             .child( "usuarios" )
                             .child( identificadoUsuarioLogado );

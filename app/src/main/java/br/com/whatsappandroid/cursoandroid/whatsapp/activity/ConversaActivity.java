@@ -134,7 +134,7 @@ public class ConversaActivity extends AppCompatActivity {
                     mensagem.setIdUsuario( idUsuarioRemetente ); //usuario que está enviando a mensagem
                     mensagem.setMensagem( textoMensagem );
 
-                    //salvamos mensagem para o remente
+                    //salvamos mensagem para o remetente
                     boolean retornoMensagemRemetente =  salvarMensagem(idUsuarioRemetente, idUsuarioDestinatario, mensagem);
                     if( !retornoMensagemRemetente ){
                         Toast.makeText(
@@ -175,7 +175,7 @@ public class ConversaActivity extends AppCompatActivity {
                         conversa1.setNome( nomeUsuarioRemetente );
                         conversa1.setMensagem( textoMensagem );
 
-                        boolean retornoConversaDestinatario = salvarConversa( idUsuarioDestinatario, idUsuarioRemetente, conversa );
+                        boolean retornoConversaDestinatario = salvarConversa( idUsuarioDestinatario, idUsuarioRemetente, conversa1 );
                         if( !retornoConversaDestinatario ){
                             Toast.makeText(
                                     ConversaActivity.this,
