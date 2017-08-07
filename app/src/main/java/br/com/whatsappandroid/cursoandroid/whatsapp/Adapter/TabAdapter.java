@@ -30,7 +30,7 @@ public class TabAdapter extends FragmentStatePagerAdapter{
                 fragment = new ContatosFragment();
                 break;
         }
-
+/*.....*/
         return fragment;
     }
 
